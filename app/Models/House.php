@@ -14,7 +14,9 @@ class House extends Model
         'description',
         'preview',
         'category_id',
-        'price'
+        'price',
+        'address',
+        'small_description'
     ];
 
     public function category(){

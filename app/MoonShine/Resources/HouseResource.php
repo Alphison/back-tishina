@@ -38,6 +38,8 @@ class HouseResource extends ModelResource
             Block::make([
                 ID::make()->sortable(),
                 Text::make('Название', 'name')->sortable()->required(),
+                Text::make('Краткое описание', 'small_description')->sortable()->required(),
+                Text::make('Адресс', 'address')->sortable()->required(),
                 BelongsTo::make('Категория', 'category', fn($item) => "$item->id - $item->name")->sortable()->searchable()->required(), 
                 Number::make('Цена', 'price')->sortable()->required(),
                 Switcher::make('Видимость', 'visible'),
