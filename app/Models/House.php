@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 
 class House extends Model
 {
@@ -22,4 +23,11 @@ class House extends Model
     public function category(){
         return $this->belongsTo(Category::class);
     } 
+
+    public function getPreviewImagePath(): string
+    {
+
+        return asset(Storage::url($this->preview));
+
+    }
 }
