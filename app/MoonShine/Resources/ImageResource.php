@@ -21,7 +21,7 @@ class ImageResource extends ModelResource
 {
     protected string $model = ImageModel::class;
 
-    protected string $title = 'Images';
+    protected string $title = 'Дополнительные изображения домов';
 
     /**
      * @return list<MoonShineComponent|Field>

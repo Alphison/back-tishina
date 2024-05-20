@@ -5,9 +5,11 @@ declare(strict_types=1);
 namespace App\Providers;
 
 use App\Models\Category;
+use App\Models\Feature;
 use App\Models\House;
 use App\Models\Image;
 use App\MoonShine\Resources\CategoryResource;
+use App\MoonShine\Resources\FeatureResource;
 use App\MoonShine\Resources\HouseResource;
 use App\MoonShine\Resources\ImageResource;
 use MoonShine\Providers\MoonShineApplicationServiceProvider;
@@ -56,12 +58,10 @@ class MoonShineServiceProvider extends MoonShineApplicationServiceProvider
                ),
             ]),
 
-            MenuGroup::make('Дома', [
-                MenuItem::make('Дома', new HouseResource(), 'heroicons.home-modern')->badge(fn() => House::query()->count()),
-                MenuItem::make('Категории', new CategoryResource(), 'heroicons.squares-2x2')->badge(fn() => Category::query()->count())
-            ])->icon('heroicons.home-modern'),
-
-            MenuItem::make('Изображения', new ImageResource(), 'heroicons.photo')->badge(fn() => Image::query()->count()),
+            MenuItem::make('Дома', new HouseResource(), 'heroicons.home-modern')->badge(fn() => House::query()->count()),
+            MenuItem::make('Категории', new CategoryResource(), 'heroicons.squares-2x2')->badge(fn() => Category::query()->count()),
+            MenuItem::make('Доп-изображения домов', new ImageResource(), 'heroicons.photo')->badge(fn() => Image::query()->count()),
+            MenuItem::make('Свойства домов', new FeatureResource(), 'heroicons.rectangle-group')->badge(fn() => Feature::query()->count()),
 
         ];
     }

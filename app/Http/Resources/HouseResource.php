@@ -23,6 +23,8 @@ class HouseResource extends JsonResource
             'price' => $this->price,
             'address' => $this->address,
             'small_description' => $this->small_description,
+            'images' => ImageResource::collection($this->images),
+            'features' => FeatureResource::collection($this->features),
         ];
     }
 }

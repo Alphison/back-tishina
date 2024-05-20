@@ -7,6 +7,7 @@ namespace App\MoonShine\Resources;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\House;
 
+use MoonShine\Decorations\Flex;
 use MoonShine\Fields\Textarea;
 use MoonShine\Fields\TinyMce;
 use MoonShine\Resources\ModelResource;
@@ -18,6 +19,7 @@ use MoonShine\Fields\Number;
 use MoonShine\Fields\Relationships\BelongsTo;
 use MoonShine\Fields\Text;
 use MoonShine\Fields\Image;
+use MoonShine\Fields\Relationships\HasMany;
 use MoonShine\Fields\Switcher;
 
 /**
@@ -27,7 +29,7 @@ class HouseResource extends ModelResource
 {
     protected string $model = House::class;
 
-    protected string $title = 'Houses';
+    protected string $title = 'Дома';
 
     /**
      * @return list<MoonShineComponent|Field>
@@ -46,7 +48,14 @@ class HouseResource extends ModelResource
                 TextArea::make('Описание', 'description')->hideOnIndex(function () {
                     return true;
                 })->required(),
-                Image::make('Превью', 'preview')->disk('local')->dir('/public/houses')->required()
+                Image::make('Превью', 'preview')->disk('local')->dir('/public/houses')->required(),
+                HasMany::make('Изображения', 'images')->hideOnIndex(function () {
+                    return true;
+                })->required(),
+                HasMany::make('Свойства', 'features')->hideOnIndex(function () {
+                    return true;
+                })->required()                            
+                
             ]),
         ];
     }

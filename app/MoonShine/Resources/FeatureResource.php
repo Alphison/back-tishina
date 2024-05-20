@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\MoonShine\Resources;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Category;
+use App\Models\Feature;
 
 use MoonShine\Resources\ModelResource;
 use MoonShine\Decorations\Block;
@@ -13,15 +13,17 @@ use MoonShine\Fields\ID;
 use MoonShine\Fields\Field;
 use MoonShine\Components\MoonShineComponent;
 use MoonShine\Fields\Text;
+use MoonShine\Fields\Image;
+use MoonShine\Fields\Relationships\BelongsTo;
 
 /**
- * @extends ModelResource<Category>
+ * @extends ModelResource<Feature>
  */
-class CategoryResource extends ModelResource
+class FeatureResource extends ModelResource
 {
-    protected string $model = Category::class;
+    protected string $model = Feature::class;
 
-    protected string $title = 'Категории';
+    protected string $title = 'Свойства домов';
 
     /**
      * @return list<MoonShineComponent|Field>
@@ -31,13 +33,15 @@ class CategoryResource extends ModelResource
         return [
             Block::make([
                 ID::make()->sortable(),
-                Text::make('Название', 'name')->sortable(),
+                Text::make('Название', 'name')->sortable()->required(),
+                Image::make('Иконка', 'icon')->disk('local')->dir('/public/icons')->required(),
+                BelongsTo::make('Дом', 'house', fn($item) => "$item->id | $item->name")->sortable(),
             ]),
         ];
     }
 
     /**
-     * @param Category $item
+     * @param Feature $item
      *
      * @return array<string, string[]|string>
      * @see https://laravel.com/docs/validation#available-validation-rules

@@ -20,9 +20,20 @@ class House extends Model
         'small_description'
     ];
 
-    public function category(){
+    public function category()
+    {
         return $this->belongsTo(Category::class);
     } 
+
+    public function images()
+    {
+        return $this->hasMany(Image::class); 
+    }
+
+    public function features()
+    {
+        return $this->hasMany(Feature::class); 
+    }
 
     public function getPreviewImagePath(): string
     {

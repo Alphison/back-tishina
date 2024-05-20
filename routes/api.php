@@ -10,4 +10,5 @@ Route::get('/user', function (Request $request) {
 })->middleware('auth:sanctum');
 
 Route::get('/houses', [HouseController::class, 'getAll']);
+Route::get('/house/{id}', [HouseController::class, 'show']);
 Route::get('/categories', [CategoryController::class, 'getAll']);
