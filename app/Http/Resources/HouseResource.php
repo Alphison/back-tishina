@@ -25,6 +25,7 @@ class HouseResource extends JsonResource
             'small_description' => $this->small_description,
             'images' => ImageResource::collection($this->images),
             'features' => FeatureResource::collection($this->features),
+            'houseUsers' => HouseUserResource::collection($this->houseUsers),
         ];
     }
 }

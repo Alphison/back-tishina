@@ -7,11 +7,15 @@ namespace App\Providers;
 use App\Models\Category;
 use App\Models\Feature;
 use App\Models\House;
+use App\Models\HouseUser;
 use App\Models\Image;
+use App\Models\User;
 use App\MoonShine\Resources\CategoryResource;
 use App\MoonShine\Resources\FeatureResource;
 use App\MoonShine\Resources\HouseResource;
+use App\MoonShine\Resources\HouseUserResource;
 use App\MoonShine\Resources\ImageResource;
+use App\MoonShine\Resources\UserResource;
 use MoonShine\Providers\MoonShineApplicationServiceProvider;
 use MoonShine\MoonShine;
 use MoonShine\Menu\MenuGroup;
@@ -58,10 +62,12 @@ class MoonShineServiceProvider extends MoonShineApplicationServiceProvider
                ),
             ]),
 
+            MenuItem::make('Клиенты', new UserResource(), 'heroicons.users')->badge(fn() => User::query()->count()),
             MenuItem::make('Дома', new HouseResource(), 'heroicons.home-modern')->badge(fn() => House::query()->count()),
             MenuItem::make('Категории', new CategoryResource(), 'heroicons.squares-2x2')->badge(fn() => Category::query()->count()),
             MenuItem::make('Доп-изображения домов', new ImageResource(), 'heroicons.photo')->badge(fn() => Image::query()->count()),
             MenuItem::make('Свойства домов', new FeatureResource(), 'heroicons.rectangle-group')->badge(fn() => Feature::query()->count()),
+            MenuItem::make('Бронирования', new HouseUserResource(), 'heroicons.shield-check')->badge(fn() => HouseUser::query()->count()),
 
         ];
     }

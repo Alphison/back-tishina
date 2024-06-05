@@ -30,6 +30,11 @@ class House extends Model
         return $this->hasMany(Image::class); 
     }
 
+    public function houseUsers()
+    {
+        return $this->hasMany(HouseUser::class); 
+    }
+
     public function features()
     {
         return $this->hasMany(Feature::class); 
