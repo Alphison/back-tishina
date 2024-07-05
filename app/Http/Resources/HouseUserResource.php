@@ -16,7 +16,7 @@ class HouseUserResource extends JsonResource
     {
         return [
             'user_id' => $this->user_id,
-            'house' => $this->house,
+            'house' => new HouseProfileResource($this->house),
             'check_in_date' => $this->check_in_date,
             'check_out_date' => $this->check_out_date,
         ];
