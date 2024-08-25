@@ -4,14 +4,18 @@ declare(strict_types=1);
 
 namespace App\Providers;
 
+use App\Models\Addition;
 use App\Models\Category;
 use App\Models\Feature;
+use App\Models\Feedback;
 use App\Models\House;
 use App\Models\HouseUser;
 use App\Models\Image;
 use App\Models\User;
+use App\MoonShine\Resources\AdditionResource;
 use App\MoonShine\Resources\CategoryResource;
 use App\MoonShine\Resources\FeatureResource;
+use App\MoonShine\Resources\FeedbackResource;
 use App\MoonShine\Resources\HouseResource;
 use App\MoonShine\Resources\HouseUserResource;
 use App\MoonShine\Resources\ImageResource;
@@ -68,6 +72,8 @@ class MoonShineServiceProvider extends MoonShineApplicationServiceProvider
             MenuItem::make('Доп-изображения домов', new ImageResource(), 'heroicons.photo')->badge(fn() => Image::query()->count()),
             MenuItem::make('Свойства домов', new FeatureResource(), 'heroicons.rectangle-group')->badge(fn() => Feature::query()->count()),
             MenuItem::make('Бронирования', new HouseUserResource(), 'heroicons.shield-check')->badge(fn() => HouseUser::query()->count()),
+            MenuItem::make('Обратная связь', new FeedbackResource(), 'heroicons.phone')->badge(fn() => Feedback::query()->count()),
+            MenuItem::make('Дополнительно', new AdditionResource(), 'heroicons.circle-stack')->badge(fn() => Addition::query()->count()),
 
         ];
     }

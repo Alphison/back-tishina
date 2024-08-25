@@ -51,11 +51,13 @@ class HouseResource extends ModelResource
                 Image::make('Превью', 'preview')->disk('local')->dir('/public/houses')->required(),
                 HasMany::make('Изображения', 'images')->hideOnIndex(function () {
                     return true;
-                })->required(),
+                })->required()->creatable(),
                 HasMany::make('Свойства', 'features')->hideOnIndex(function () {
                     return true;
-                })->required()                            
-                
+                })->required()->creatable(),                          
+                HasMany::make('Дополнительно', 'additions')->hideOnIndex(function () {
+                    return true;
+                })->required()->creatable()  
             ]),
         ];
     }

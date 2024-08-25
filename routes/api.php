@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\HouseController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -14,11 +15,20 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::get('/home', [HouseController::class, 'getAll']);
 });
 
+Route::controller(FeedbackController::class)->group(function () {
+    Route::post('/feedback', 'create');
+});
+
 Route::controller(AuthController::class)->group(function () {
 
     Route::post('/login', 'login');
-    Route::post('/logout', 'logout')->middleware(['auth:sanctum']);
-    Route::get('/me', 'me')->middleware(['auth:sanctum']);
-    Route::get('/profile', 'profile')->middleware(['auth:sanctum']);
+
+    Route::group(['middleware' => 'auth:sanctum'], function () {
+
+        Route::post('/logout', 'logout');
+        Route::get('/me', 'me');
+        Route::get('/profile', 'profile');
+        
+    });    
 
 });

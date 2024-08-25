@@ -10,6 +10,10 @@ class Feature extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'house_id'
+    ];
+
     public function getIconImagePath(): string
     {
 
